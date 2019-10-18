@@ -1,0 +1,4 @@
+CREATE TRIGGER `cena_triger` AFTER INSERT ON `produkti` FOR EACH ROW BEGIN IF NEW.cena < 1000 THEN INSERT INTO `notifikacii`(`id_produkt`, `prethodna_cena`) VALUES (NEW.id, NEW.cena); END IF; END;
+CREATE TRIGGER `cena_trig_not_del` AFTER UPDATE ON `produkti` FOR EACH ROW BEGIN IF NEW.cena >= 1000 THEN DELETE FROM `notifikacii` WHERE notifikacii.id_produkt = NEW.id; END IF; END
+CREATE TRIGGER `cena_trig_del_update` AFTER UPDATE ON `produkti` FOR EACH ROW BEGIN IF NEW.cena < 1000 THEN INSERT INTO `notifikacii`(`id_produkt`, `prethodna_cena`) VALUES (NEW.id, NEW.cena); END IF; END
+CREATE TRIGGER `after_del` AFTER DELETE ON `produkti` FOR EACH ROW DELETE FROM `notifikacii` WHERE notifikacii.id_produkt = OLD.id
