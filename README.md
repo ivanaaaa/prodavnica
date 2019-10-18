@@ -1,4 +1,4 @@
 # prodavnica
  Online store - prodavnica
-php artisan serve
-php artisan migrate
+$php artisan serve
+$php artisan migrate
